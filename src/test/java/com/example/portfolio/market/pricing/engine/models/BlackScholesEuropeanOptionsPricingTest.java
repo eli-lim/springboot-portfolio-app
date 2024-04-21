@@ -12,7 +12,7 @@ class BlackScholesEuropeanOptionsPricingTest {
 
     @ParameterizedTest(name = "spotPrice={0} strikePrice={1} riskFreeRate={2} volatility={3} timeToMaturityInYears={4} expectedCall={5} expectedPut={6}")
     @MethodSource("optionsPriceArgs")
-    void shouldCalculateCallPriceCorrectly(
+    void shouldCalculateOptionPriceCorrectly(
         final double spotPrice,
         final double strikePrice,
         final double riskFreeRate,
