@@ -1,7 +1,7 @@
 package com.example.portfolio.market.pricing.store;
 
 import com.example.portfolio.security.Security;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentMap;
  * This class is thread-safe and allows for concurrent reads and writes.
  * In reality, this would be replaced with a durable, high-performance, key-value store like Redis.
  */
-@Service
+@Component
 class InMemoryPriceStore implements PriceStore {
 
     /**

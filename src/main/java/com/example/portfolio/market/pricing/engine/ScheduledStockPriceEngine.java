@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -18,7 +19,7 @@ import java.util.Date;
 /**
  * Scheduled to run at random intervals to update the price of a stock and its options.
  */
-@Service
+@Component
 public class ScheduledStockPriceEngine implements PriceEngine {
 
     private static final Logger LOG = LoggerFactory.getLogger(ScheduledStockPriceEngine.class);

@@ -8,6 +8,7 @@ import com.example.portfolio.security.Security;
 import org.springframework.context.event.EventListener;
 import org.springframework.lang.NonNull;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Subscribes to price updates and logs the portfolio's positions and their respective market values.
  */
-@Service
+@Component
 public class PortfolioPrinter {
 
     private final PositionProvider positionProvider;
