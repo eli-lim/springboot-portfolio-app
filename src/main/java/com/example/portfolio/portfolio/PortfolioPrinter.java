@@ -5,8 +5,9 @@ import com.example.portfolio.market.pricing.PriceTickEvent;
 import com.example.portfolio.position.Position;
 import com.example.portfolio.position.PositionProvider;
 import com.example.portfolio.security.Security;
-import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.EventListener;
 import org.springframework.lang.NonNull;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  * Subscribes to price updates and logs the portfolio's positions and their respective market values.
  */
 @Service
-public class PortfolioPrinter implements ApplicationListener<PriceTickEvent> {
+public class PortfolioPrinter {
 
     private final PositionProvider positionProvider;
     private final PriceProvider priceProvider;
@@ -28,8 +29,14 @@ public class PortfolioPrinter implements ApplicationListener<PriceTickEvent> {
         this.priceProvider = priceProvider;
     }
 
-    @Override
-    public void onApplicationEvent(@NonNull final PriceTickEvent event) {
+    @Async
+    @EventListener
+    public void handlePriceTick(@NonNull final PriceTickEvent event) {
+        System.out.println();
+        System.out.println("Market Data Update");
+        System.out.printf(
+            "\n%s from %s to %s over %sms\n%n",
+            event.getSymbol(), event.getOldPrice(), event.getNewPrice(), event.getIntervalMs());
         System.out.println(buildPositionsTable());
     }
 

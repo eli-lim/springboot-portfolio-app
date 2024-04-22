@@ -9,6 +9,7 @@ import com.example.portfolio.security.OptionType;
 import com.example.portfolio.security.Stock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -46,12 +47,11 @@ public class ScheduledStockPriceEngine implements PriceEngine {
         // Update option prices
         stock.getOptions().forEach(option -> priceStore.setPrice(option, computeOptionPrice(option, epochMilli)));
 
+        LOG.info("Stock {} | t {} -> {} | p {} -> {}", stock.getSymbol(), timeStep.getLast().toEpochMilli(), timeStep.getCurrent().toEpochMilli(), lastPrice, nextPrice);
+
         // Publish the price tick event
         applicationEventPublisher.publishEvent(
-            new PriceTickEvent(this, stock.getSymbol(), lastPrice, nextPrice, dt)
-        );
-
-        LOG.info("Timestep {} -> {} | Stock {} from {} -> {}", timeStep.getLast().toEpochMilli(), timeStep.getCurrent().toEpochMilli(), stock.getSymbol(), lastPrice, nextPrice);
+            new PriceTickEvent(this, stock.getSymbol(), lastPrice, nextPrice, dt));
     }
 
     private double computeOptionPrice(Option option, long epochMilli) {

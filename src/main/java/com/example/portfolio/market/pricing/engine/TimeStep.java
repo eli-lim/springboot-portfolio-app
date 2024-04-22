@@ -11,6 +11,11 @@ public class TimeStep {
 
     private final Instant currEpoch;
 
+    public TimeStep(Instant lastEpoch) {
+        this.lastEpoch = lastEpoch;
+        this.currEpoch = lastEpoch;
+    }
+
     public TimeStep(Instant lastEpoch, Instant currEpoch) {
         this.lastEpoch = lastEpoch;
         this.currEpoch = currEpoch;
