@@ -35,6 +35,7 @@ public class PortfolioPrinter implements ApplicationListener<PriceTickEvent> {
 
     /**
      * Builds a table of the portfolio's positions and their respective market values.
+     *
      * @return the built table to be printed to the console.
      */
     String buildPositionsTable() {
@@ -57,10 +58,10 @@ public class PortfolioPrinter implements ApplicationListener<PriceTickEvent> {
             double mtmValue = priceProvider.getMarketPrice(security) * position.getSize();
 
             sb.append(String.format(format,
-                    position.getSecurity().getSymbol(),
-                    price,
-                    position.getSize(),
-                    mtmValue
+                position.getSecurity().getSymbol(),
+                price,
+                position.getSize(),
+                mtmValue
             ));
 
             totalValue += mtmValue;

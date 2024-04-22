@@ -4,7 +4,7 @@ import com.example.portfolio.security.Security;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryPriceStoreTest {
 

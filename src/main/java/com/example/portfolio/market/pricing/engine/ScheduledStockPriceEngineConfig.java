@@ -87,9 +87,9 @@ class ScheduledStockPriceEngineConfig implements SchedulingConfigurer {
             timeStep = timeStep.advance(deltaT);
 
             Instant nextExecutionTime =
-                    lastCompletionTime.orElseGet(Date::new)
-                            .toInstant()
-                            .plusMillis(deltaT);
+                lastCompletionTime.orElseGet(Date::new)
+                    .toInstant()
+                    .plusMillis(deltaT);
 
             return Date.from(nextExecutionTime);
         }

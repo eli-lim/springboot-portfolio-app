@@ -46,16 +46,16 @@ class PortfolioPrinterTest {
         // Given the following positions
         String expectedTable =
             "\n" +
-            "                  ## Portfolio                                                                                          \n" +
-            "                        symbol                         price                           qty                         value\n" +
-            "                          AAPL                         110.0                          1000                      110000.0\n" +
-            "           AAPL-OCT-2024-110-C                           0.0                        -20000                          -0.0\n" +
-            "           AAPL-OCT-2024-110-P                           0.0                         20000                           0.0\n" +
-            "                          TSLA                         390.0                          -500                     -195000.0\n" +
-            "           TSLA-NOV-2024-400-C                           0.0                         10000                           0.0\n" +
-            "           TSLA-DEC-2024-400-P                           0.0                        -10000                          -0.0\n" +
-            "             # Total portfolio                                                                                  -85000.0\n" +
-            "\n";
+                "                  ## Portfolio                                                                                          \n" +
+                "                        symbol                         price                           qty                         value\n" +
+                "                          AAPL                         110.0                          1000                      110000.0\n" +
+                "           AAPL-OCT-2024-110-C                           0.0                        -20000                          -0.0\n" +
+                "           AAPL-OCT-2024-110-P                           0.0                         20000                           0.0\n" +
+                "                          TSLA                         390.0                          -500                     -195000.0\n" +
+                "           TSLA-NOV-2024-400-C                           0.0                         10000                           0.0\n" +
+                "           TSLA-DEC-2024-400-P                           0.0                        -10000                          -0.0\n" +
+                "             # Total portfolio                                                                                  -85000.0\n" +
+                "\n";
         assertEquals(expectedTable, portfolioPrinter.buildPositionsTable());
 
         // When the price of AAPL ticks 1000ms
@@ -68,16 +68,16 @@ class PortfolioPrinterTest {
         // Then the generated table should be updated with the new values
         expectedTable =
             "\n" +
-            "                  ## Portfolio                                                                                          \n" +
-            "                        symbol                         price                           qty                         value\n" +
-            "                          AAPL            110.03188242516384                          1000            110031.88242516384\n" +
-            "           AAPL-OCT-2024-110-C             15.84110346819947                        -20000            -316822.0693639894\n" +
-            "           AAPL-OCT-2024-110-P            14.726638256812265                         20000             294532.7651362453\n" +
-            "                          TSLA                         390.0                          -500                     -195000.0\n" +
-            "           TSLA-NOV-2024-400-C                           0.0                         10000                           0.0\n" +
-            "           TSLA-DEC-2024-400-P                           0.0                        -10000                          -0.0\n" +
-            "             # Total portfolio                                                                       -107257.42180258027\n" +
-            "\n";
+                "                  ## Portfolio                                                                                          \n" +
+                "                        symbol                         price                           qty                         value\n" +
+                "                          AAPL            110.03188242516384                          1000            110031.88242516384\n" +
+                "           AAPL-OCT-2024-110-C             15.84110346819947                        -20000            -316822.0693639894\n" +
+                "           AAPL-OCT-2024-110-P            14.726638256812265                         20000             294532.7651362453\n" +
+                "                          TSLA                         390.0                          -500                     -195000.0\n" +
+                "           TSLA-NOV-2024-400-C                           0.0                         10000                           0.0\n" +
+                "           TSLA-DEC-2024-400-P                           0.0                        -10000                          -0.0\n" +
+                "             # Total portfolio                                                                       -107257.42180258027\n" +
+                "\n";
         assertEquals(expectedTable, portfolioPrinter.buildPositionsTable());
     }
 }

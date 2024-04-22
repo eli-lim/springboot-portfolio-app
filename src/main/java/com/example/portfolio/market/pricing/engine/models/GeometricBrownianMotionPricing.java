@@ -8,10 +8,11 @@ public class GeometricBrownianMotionPricing {
 
     /**
      * Calculates the next price of a stock using the Geometric Brownian Motion model.
-     * @param expectedReturn The expected return of the stock, denoted by μ.
+     *
+     * @param expectedReturn    The expected return of the stock, denoted by μ.
      * @param standardDeviation The standard deviation of the stock, denoted by σ.
-     * @param lastPrice The last price of the stock.
-     * @param dtMs The time interval in ms, denoted by Δt.
+     * @param lastPrice         The last price of the stock.
+     * @param dtMs              The time interval in ms, denoted by Δt.
      */
     public static double price(
         final double expectedReturn,

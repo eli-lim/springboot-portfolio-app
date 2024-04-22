@@ -32,8 +32,8 @@ public class PositionProviderCsv implements PositionProvider {
     private final Set<String> symbols = new HashSet<>();
 
     public PositionProviderCsv(
-            final ResourceLoader resourceLoader,
-            final SecurityRepository securityRepository
+        final ResourceLoader resourceLoader,
+        final SecurityRepository securityRepository
     ) {
         this.resourceLoader = resourceLoader;
         this.securityRepository = securityRepository;
@@ -96,8 +96,8 @@ public class PositionProviderCsv implements PositionProvider {
 
                 return new Position(security, positionSize);
             })
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
 
         // Cache the symbols for quick lookup
         positions.forEach(position -> symbols.add(position.getSecurity().getSymbol()));

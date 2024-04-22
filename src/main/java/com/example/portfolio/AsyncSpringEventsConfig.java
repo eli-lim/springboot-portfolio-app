@@ -16,7 +16,7 @@ public class AsyncSpringEventsConfig {
     @Bean(name = "applicationEventMulticaster")
     public ApplicationEventMulticaster simpleApplicationEventMulticaster() {
         SimpleApplicationEventMulticaster eventMulticaster =
-                new SimpleApplicationEventMulticaster();
+            new SimpleApplicationEventMulticaster();
 
         // Instead of using SimpleAsyncTaskExecutor, we use a ThreadPoolTaskExecutor
         // to make use of thread re-use; reduces overhead of creating new threads.
