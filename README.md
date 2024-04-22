@@ -47,8 +47,8 @@ flowchart LR
   - Leverage Spring's async capabilities and abstractions
 
 #### Testing Strategy / Follow-ups
-- For brevity, 2 unit tests have been written demonstrating the typical unit testing strategy.
-- Bulk of the testing should be focused on the `PriceEngine` given that it contains the bulk of the business logic.
+- Some tests have been written demonstrating the typical unit testing strategy.
+- Bulk of the testing is focused on the `PriceEngine` given that it contains the bulk of the business logic.
 - To test `GeometricBrownianMotion`, we initialize a static RNG (in the test only) with a fixed seed and compare 
   the output with expected values.
 

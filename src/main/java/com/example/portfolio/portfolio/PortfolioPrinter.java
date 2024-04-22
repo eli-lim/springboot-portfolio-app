@@ -30,42 +30,45 @@ public class PortfolioPrinter implements ApplicationListener<PriceTickEvent> {
 
     @Override
     public void onApplicationEvent(@NonNull final PriceTickEvent event) {
-        final List<Position> positions = positionProvider.listPositions();
+        System.out.println(buildPositionsTable());
+    }
+
+    /**
+     * Builds a table of the portfolio's positions and their respective market values.
+     * @return the built table to be printed to the console.
+     */
+    String buildPositionsTable() {
+        StringBuilder sb = new StringBuilder();
 
         // Calculate the total value of the portfolio
         double totalValue = 0.0;
 
-        // Pretty print the portfolio's positions
-        System.out.println();
-        System.out.println("Market Data Update");
-        System.out.println(
-           event.getSymbol() + " from " + event.getOldPrice() + " to " + event.getNewPrice() + " over " + event.getIntervalMs() + "ms"
-        );
-
-        if (!positionProvider.hasPosition(event.getSymbol())) {
-            // The price update is not for a security in the portfolio
-            return;
-        }
-
+        // Log the table header
         String format = "%30s%30s%30s%30s%n";
-        System.out.format(format, "## Portfolio", "", "", "");
-        System.out.format(format, "symbol", "price", "qty", "value");
+        sb.append("\n");
+        sb.append(String.format(format, "## Portfolio", "", "", ""));
+        sb.append(String.format(format, "symbol", "price", "qty", "value"));
+
+        // Log the positions
+        final List<Position> positions = positionProvider.listPositions();
         for (Position position : positions) {
-            // Log each position
             Security security = position.getSecurity();
             double price = priceProvider.getMarketPrice(security);
             double mtmValue = priceProvider.getMarketPrice(security) * position.getSize();
 
-            System.out.format(format,
-                position.getSecurity().getSymbol(),
-                price,
-                position.getSize(),
-                mtmValue
-            );
+            sb.append(String.format(format,
+                    position.getSecurity().getSymbol(),
+                    price,
+                    position.getSize(),
+                    mtmValue
+            ));
 
             totalValue += mtmValue;
         }
-        System.out.format(format, "# Total portfolio", "", "", totalValue);
-        System.out.println();
+
+        // Log the total value of the portfolio
+        sb.append(String.format(format, "# Total portfolio", "", "", totalValue));
+        sb.append("\n");
+        return sb.toString();
     }
 }

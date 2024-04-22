@@ -17,7 +17,7 @@ public class GeometricBrownianMotionPricing {
         final double expectedReturn,
         final double standardDeviation,
         final double lastPrice,
-        final int dtMs
+        final long dtMs
     ) {
         double mu = expectedReturn; // μ
         double sigma = standardDeviation; // σ
@@ -36,7 +36,7 @@ public class GeometricBrownianMotionPricing {
     /**
      * Sets the seed for the random number generator.
      */
-    static void setSeed(long seed) {
+    public static void setSeed(long seed) {
         random.setSeed(seed);
     }
 }

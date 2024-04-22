@@ -5,38 +5,36 @@ import com.example.portfolio.market.pricing.PriceTickEvent;
 import com.example.portfolio.market.pricing.engine.models.BlackScholesEuropeanOptionsPricing;
 import com.example.portfolio.market.pricing.engine.models.GeometricBrownianMotionPricing;
 import com.example.portfolio.security.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Scheduled to run at random intervals to update the price of a stock and its options.
  */
-class ScheduledStockPriceEngineTick implements Runnable {
+@Service
+public class ScheduledStockPriceEngine implements PriceEngine {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ScheduledStockPriceEngine.class);
 
     private final ApplicationEventPublisher applicationEventPublisher;
     private final PriceStore priceStore;
-    private final Stock stock;
-    private final AtomicInteger deltaT;
 
-    public ScheduledStockPriceEngineTick(
-        ApplicationEventPublisher applicationEventPublisher,
-        PriceStore priceStore,
-        Stock stock,
-        AtomicInteger deltaT
+    public ScheduledStockPriceEngine(
+        final ApplicationEventPublisher applicationEventPublisher,
+        final PriceStore priceStore
     ) {
         this.applicationEventPublisher = applicationEventPublisher;
         this.priceStore = priceStore;
-        this.stock = stock;
-        this.deltaT = deltaT;
     }
 
     @Override
-    public void run() {
-        int dt = deltaT.get();
-        long epochMilli = Instant.now().toEpochMilli();
+    public void onTick(final Stock stock, final TimeStep timeStep) {
+        long dt = timeStep.getDeltaMs();
+        long epochMilli = timeStep.getLast().toEpochMilli();
 
         // Update stock price
         double lastPrice = priceStore.getPrice(stock);
@@ -50,14 +48,16 @@ class ScheduledStockPriceEngineTick implements Runnable {
         applicationEventPublisher.publishEvent(
             new PriceTickEvent(this, stock.getSymbol(), lastPrice, nextPrice, dt)
         );
+
+        LOG.info("Timestep {} -> {} | Stock {} from {} -> {}", timeStep.getLast().toEpochMilli(), timeStep.getCurrent().toEpochMilli(), stock.getSymbol(), lastPrice, nextPrice);
     }
 
-    private double computeOptionPrice(Option option, long now) {
+    private double computeOptionPrice(Option option, long epochMilli) {
         // Time to expiration in years
         Date expiration = option.getExpiration();
         double yearInMs = 31536000000.0;
 
-        double t = (expiration.getTime() - now) / yearInMs;
+        double t = (expiration.getTime() - epochMilli) / yearInMs;
 
         // Constant risk-free rate at 2%
         double r = 0.02;
