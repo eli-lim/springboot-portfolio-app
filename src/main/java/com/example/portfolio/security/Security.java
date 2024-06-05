@@ -6,9 +6,9 @@ import static javax.persistence.DiscriminatorType.STRING;
 import static javax.persistence.InheritanceType.SINGLE_TABLE;
 
 @Entity
-@Table(name="security")
-@Inheritance(strategy=SINGLE_TABLE)
-@DiscriminatorColumn(name="securityType", discriminatorType=STRING, length=20)
+@Table(name = "security")
+@Inheritance(strategy = SINGLE_TABLE)
+@DiscriminatorColumn(name = "securityType", discriminatorType = STRING, length = 20)
 public class Security {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

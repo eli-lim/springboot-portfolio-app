@@ -4,10 +4,11 @@ public class BlackScholesEuropeanOptionsPricing {
 
     /**
      * Calculates the price of a European option using the Black-Scholes formula.
-     * @param spotPrice The current price of the underlying asset.
-     * @param strikePrice The price at which the option holder can buy or sell the underlying asset.
-     * @param riskFreeRate The risk-free interest rate.
-     * @param volatility The standard deviation of the underlying asset's returns.
+     *
+     * @param spotPrice             The current price of the underlying asset.
+     * @param strikePrice           The price at which the option holder can buy or sell the underlying asset.
+     * @param riskFreeRate          The risk-free interest rate.
+     * @param volatility            The standard deviation of the underlying asset's returns.
      * @param timeToMaturityInYears The time until the option expires in years.
      * @return The price of the option.
      */
@@ -23,10 +24,11 @@ public class BlackScholesEuropeanOptionsPricing {
 
     /**
      * Calculates the price of a European option using the Black-Scholes formula.
-     * @param spotPrice The current price of the underlying asset.
-     * @param strikePrice The price at which the option holder can buy or sell the underlying asset.
-     * @param riskFreeRate The risk-free interest rate.
-     * @param volatility The standard deviation of the underlying asset's returns.
+     *
+     * @param spotPrice             The current price of the underlying asset.
+     * @param strikePrice           The price at which the option holder can buy or sell the underlying asset.
+     * @param riskFreeRate          The risk-free interest rate.
+     * @param volatility            The standard deviation of the underlying asset's returns.
      * @param timeToMaturityInYears The time until the option expires in years.
      * @return The price of the option.
      */

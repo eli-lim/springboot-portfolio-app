@@ -10,9 +10,9 @@ public class PriceTickEvent extends ApplicationEvent {
     private final String symbol;
     private final double oldPrice;
     private final double newPrice;
-    private final int intervalMs;
+    private final long intervalMs;
 
-    public PriceTickEvent(Object source, String symbol, double oldPrice, double newPrice, int intervalMs) {
+    public PriceTickEvent(Object source, String symbol, double oldPrice, double newPrice, long intervalMs) {
         super(source);
         this.symbol = symbol;
         this.oldPrice = oldPrice;
@@ -32,7 +32,7 @@ public class PriceTickEvent extends ApplicationEvent {
         return newPrice;
     }
 
-    public int getIntervalMs() {
+    public long getIntervalMs() {
         return intervalMs;
     }
 }

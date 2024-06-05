@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * The positions are loaded from the CSV file when the application starts.
  * In reality, this likely would be dynamic, instead of some static value.
  */
-@Service
+@Component
 public class PositionProviderCsv implements PositionProvider {
 
     private static final Logger LOG = LoggerFactory.getLogger(PositionProviderCsv.class.getName());
@@ -32,8 +32,8 @@ public class PositionProviderCsv implements PositionProvider {
     private final Set<String> symbols = new HashSet<>();
 
     public PositionProviderCsv(
-            final ResourceLoader resourceLoader,
-            final SecurityRepository securityRepository
+        final ResourceLoader resourceLoader,
+        final SecurityRepository securityRepository
     ) {
         this.resourceLoader = resourceLoader;
         this.securityRepository = securityRepository;
@@ -96,8 +96,8 @@ public class PositionProviderCsv implements PositionProvider {
 
                 return new Position(security, positionSize);
             })
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
 
         // Cache the symbols for quick lookup
         positions.forEach(position -> symbols.add(position.getSecurity().getSymbol()));
